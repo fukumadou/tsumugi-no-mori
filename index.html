@@ -3,308 +3,340 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>おもいで絵本 — 思い出しの五拍｜紬の杜</title>
+<title>頭のなか → 絵 — 紡ぎの四段｜紬の杜</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Shippori+Mincho:wght@500;600;800&family=Zen+Kaku+Gothic+New:wght@400;500;700&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
 <style>
-:root{
-  --washi:#F0EFE8; --washi-deep:#E6E4D9; --sumi:#26241F; --sumi-soft:#5B574C;
-  --ai:#2E4A6B; --ai-veil:rgba(46,74,107,.10); --hi:#B3402E; --kin:#8F7742;
-  --line:#D4D1C4; --mono:'IBM Plex Mono',monospace;
-}
+:root{--washi:#F0EFE8;--washi-deep:#E6E4D9;--sumi:#26241F;--sumi-soft:#5B574C;
+--ai:#2E4A6B;--ai-veil:rgba(46,74,107,.10);--hi:#B3402E;--kin:#8F7742;--line:#D4D1C4;--mono:'IBM Plex Mono',monospace}
 *{margin:0;padding:0;box-sizing:border-box}
-html{scroll-behavior:smooth}
-html,body{overflow-x:clip}
-body{background:var(--washi);color:var(--sumi);font-family:'Zen Kaku Gothic New',sans-serif;
-  font-size:15px;line-height:1.75;-webkit-font-smoothing:antialiased;overflow-wrap:anywhere}
-@media (prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}}
+html{scroll-behavior:smooth}html,body{overflow-x:clip}
+body{background:var(--washi);color:var(--sumi);font-family:'Zen Kaku Gothic New',sans-serif;font-size:15px;line-height:1.8;overflow-wrap:anywここ}
 ::selection{background:var(--ai);color:#fff}
-a{color:var(--ai)}
-
-.hero{padding:56px 6vw 40px;border-bottom:1px solid var(--line)}
-.kicker{font-family:var(--mono);font-size:12px;letter-spacing:.35em;color:var(--kin);text-transform:uppercase}
-.hero h1{font-family:'Shippori Mincho',serif;font-weight:800;font-size:clamp(28px,4.6vw,48px);
-  line-height:1.3;margin:.5em 0 .3em}
-.hero h1 em{font-style:normal;color:var(--ai)}
-.hero p.thesis{font-family:'Shippori Mincho',serif;color:var(--sumi-soft);max-width:42em}
-.beatnav{display:flex;flex-wrap:wrap;gap:8px;margin-top:24px}
-.beatnav a{
-  display:flex;align-items:baseline;gap:6px;border:1px solid var(--line);background:var(--washi-deep);
-  padding:8px 14px;border-radius:2px;text-decoration:none;transition:all .15s;
-}
-.beatnav a b{font-family:'Shippori Mincho',serif;color:var(--ai)}
-.beatnav a:hover{border-color:var(--ai);background:var(--ai-veil)}
-
-.studio{display:grid;grid-template-columns:1fr 300px;gap:44px;padding:52px 6vw 72px;
-  align-items:start;max-width:1200px;margin:0 auto}
-@media(max-width:960px){.studio{grid-template-columns:1fr}}
-
-.beat{margin-bottom:48px;scroll-margin-top:16px}
-.beat-head{display:flex;align-items:baseline;gap:12px;margin-bottom:4px}
-.beat-no{font-family:var(--mono);font-size:13px;color:var(--kin)}
-.beat-head h2{font-family:'Shippori Mincho',serif;font-size:24px;font-weight:600}
-.beat-head h2 small{font-size:12px;color:var(--sumi-soft);margin-left:10px;letter-spacing:.15em;font-weight:500}
-.beat>.lead{color:var(--sumi-soft);font-size:13.5px;margin-bottom:16px}
+.hero{padding:48px 6vw 36px;border-bottom:1px solid var(--line)}
+.kicker{font-family:var(--mono);font-size:12px;letter-spacing:.35em;color:var(--kin)}
+.hero h1{font-family:'Shippori Mincho',serif;font-weight:800;font-size:clamp(26px,4.4vw,44px);margin:.4em 0}
+.hero .thesis{font-family:'Shippori Mincho',serif;color:var(--sumi-soft);max-width:44em}
+.flow{display:flex;flex-wrap:wrap;gap:6px;margin-top:22px;align-items:center}
+.flow .fstep{border:1px solid var(--line);background:var(--washi-deep);padding:8px 14px;border-radius:2px;
+  font-family:'Shippori Mincho',serif;font-size:15px;color:var(--ai);text-decoration:none;display:inline-block;transition:all .15s}
+.flow .fstep:hover{border-color:var(--ai);background:var(--ai-veil)}
+.flow .arr{color:var(--kin);font-size:13px}
+.stage{padding:48px 6vw 24px;max-width:1080px;margin:0 auto;scroll-margin-top:8px}
+.stage-head{display:flex;align-items:baseline;gap:12px;flex-wrap:wrap}
+.stage-no{font-family:var(--mono);font-size:13px;color:var(--kin)}
+.stage-head h2{font-family:'Shippori Mincho',serif;font-size:24px;font-weight:600}
+.stage-head h2 small{font-size:12px;color:var(--sumi-soft);margin-left:10px;font-weight:500;letter-spacing:.15em}
+.stage>.lead{color:var(--sumi-soft);font-size:13.5px;margin:6px 0 16px;max-width:44em}
+.bigTA{width:100%;border:1px solid var(--line);background:#fff;padding:14px;border-radius:2px;
+  font-family:'Shippori Mincho',serif;font-size:15.5px;line-height:2;min-height:7em;resize:vertical}
+.bigTA:focus{outline:none;border-color:var(--ai);box-shadow:0 0 0 3px var(--ai-veil)}
+.bigTA::placeholder{color:#B4B0A2;font-family:'Zen Kaku Gothic New',sans-serif;font-size:13.5px}
+.q{border-left:3px solid var(--kin);padding:2px 0 2px 12px;margin-bottom:16px}
+.q b{font-family:'Shippori Mincho',serif;font-size:16px;display:block;margin-bottom:6px}
 .chips{display:flex;flex-wrap:wrap;gap:8px;max-width:100%}
-.chip{border:1px solid var(--line);background:#fff;padding:10px 16px;border-radius:2px;
-  cursor:pointer;font-size:15.5px;font-family:inherit;color:var(--sumi);transition:all .15s;max-width:100%}
+.chip{border:1px solid var(--line);background:#fff;padding:10px 16px;border-radius:2px;cursor:pointer;
+  font-size:15.5px;font-family:inherit;max-width:100%}
 .chip:hover{border-color:var(--ai);color:var(--ai)}
 .chip[aria-pressed="true"]{background:var(--ai);border-color:var(--ai);color:#fff}
 .chip:focus-visible{outline:2px solid var(--hi);outline-offset:2px}
-.add-row{display:flex;gap:6px;margin-top:14px;max-width:100%}
+.add-row{display:flex;gap:6px;margin-top:12px;max-width:480px}
 .add-row input{flex:1;min-width:0;border:1px solid var(--line);background:#fff;padding:12px 14px;
   border-radius:2px;font-family:inherit;font-size:16px}
 .add-row input:focus{outline:none;border-color:var(--ai)}
-.add-row button{border:1px solid var(--ai);background:var(--ai);color:#fff;padding:12px 20px;
-  border-radius:2px;cursor:pointer;font-family:inherit;font-size:14px}
-.beat .hint{font-size:11.5px;color:var(--sumi-soft);margin-top:8px}
-
-/* 見開きプレビュー */
-.book-col{position:sticky;top:20px}
-.book{
-  background:linear-gradient(180deg,#FBFAF5,#F2EFE3);
-  border:1px solid var(--line);box-shadow:2px 3px 0 rgba(38,36,31,.08);
-  padding:24px 18px 26px;position:relative;
+.add-row button{border:1px solid var(--ai);background:var(--ai);color:#fff;padding:12px 20px;border-radius:2px;cursor:pointer;font-family:inherit;font-size:14px}
+.pull-line{
+  font-family:'Shippori Mincho',serif;font-size:16px;line-height:2.1;
+  background:#fff;border:1px solid var(--line);border-radius:2px;padding:18px;min-height:3.5em;
 }
-.book::before{content:"";position:absolute;inset:6px auto 6px 50%;width:1px;background:var(--line)}
-.book h3{font-family:var(--mono);font-size:11px;letter-spacing:.3em;color:var(--kin);
-  text-align:center;margin-bottom:16px}
-.page{padding:4px 14px 12px}
-.page h4{font-family:'Shippori Mincho',serif;font-size:13px;color:var(--ai);margin-bottom:6px;letter-spacing:.1em}
-.page p{font-family:'Shippori Mincho',serif;font-size:14px;line-height:1.9;min-height:2em}
-.page p .empty{color:#B4B0A2;font-size:12px;font-family:'Zen Kaku Gothic New',sans-serif}
-.fold{height:1px;background:var(--line);margin:2px 0 12px}
-
-.output{margin-top:18px;border:1px solid var(--line);background:#fff;padding:20px;border-radius:2px}
-.output h4{font-family:var(--mono);font-size:11px;letter-spacing:.3em;color:var(--kin);margin-bottom:8px}
-.out-jp{font-family:'Shippori Mincho',serif;font-size:15px;line-height:2}
-.out-popup{
-  font-family:var(--mono);font-size:12px;line-height:1.8;color:var(--ai);
-  margin-top:14px;padding-top:12px;border-top:1px dashed var(--line);word-break:break-word;
-}
-.copy-btn{margin-top:14px;width:100%;padding:12px;border:none;cursor:pointer;background:var(--hi);
-  color:#fff;font-family:inherit;font-size:15px;font-weight:700;letter-spacing:.15em;border-radius:2px}
+.pull-line .empty{color:#B4B0A2;font-size:13px;font-family:'Zen Kaku Gothic New',sans-serif}
+.finish-grid{display:grid;grid-template-columns:1fr 320px;gap:36px;align-items:start}
+@media(max-width:960px){.finish-grid{grid-template-columns:1fr}}
+.field label{display:block;font-family:var(--mono);font-size:12px;letter-spacing:.15em;color:var(--kin);margin-bottom:6px}
+.field{margin-bottom:16px}
+.field input,.field textarea{width:100%;border:1px solid var(--line);background:#fff;padding:12px 14px;
+  border-radius:2px;font-family:inherit;font-size:16px;resize:vertical}
+.field textarea{min-height:4.5em;line-height:1.8}
+.field input:focus,.field textarea:focus{outline:none;border-color:var(--ai);box-shadow:0 0 0 3px var(--ai-veil)}
+.stage-finish{background:var(--washi-deep);border-top:1px solid var(--line);margin-top:16px;padding-bottom:40px}
+.prev{background:linear-gradient(180deg,#FBFAF5,#F2EFE3);border:1px solid var(--line);
+  box-shadow:2px 3px 0 rgba(38,36,31,.08);padding:24px 18px;position:sticky;top:20px}
+.prev h3{font-family:var(--mono);font-size:11px;letter-spacing:.3em;color:var(--kin);text-align:center;margin-bottom:14px}
+.prev .block{border:1px solid var(--line);background:#fff;padding:14px;margin-bottom:12px;border-radius:2px}
+.prev .block b{font-family:var(--mono);font-size:10px;letter-spacing:.25em;color:var(--kin);display:block;margin-bottom:6px}
+.prev .block p{font-family:'Shippori Mincho',serif;font-size:14px;line-height:1.9;overflow-wrap:anywここ}
+.prev .block.en p{font-family:var(--mono);font-size:12px;color:var(--ai)}
+.prev .block .empty{color:#B4B0A2;font-size:12px}
+.copy-btn{width:100%;padding:12px;border:none;cursor:pointer;background:var(--hi);color:#fff;
+  font-family:inherit;font-size:15px;font-weight:700;letter-spacing:.15em;border-radius:2px;margin-top:6px}
 .copy-btn:hover{filter:brightness(1.1)}
-.copy-btn.ghost{background:transparent;color:var(--ai);border:1px solid var(--ai);margin-top:8px}
+.copy-btn.ghost{background:transparent;color:var(--ai);border:1px solid var(--ai)}
 .copy-btn:focus-visible{outline:2px solid var(--sumi);outline-offset:2px}
 .toast{font-size:12px;color:var(--ai);text-align:center;height:1.4em;margin-top:8px;opacity:0;transition:opacity .2s}
 .toast.show{opacity:1}
-.reset{margin-top:12px;width:100%;background:none;border:none;cursor:pointer;font-family:inherit;
-  font-size:12px;color:var(--sumi-soft);text-decoration:underline}
-.note-tip{margin-top:16px;font-size:12px;color:var(--sumi-soft);background:var(--washi-deep);
-  padding:10px 12px;border-radius:2px;line-height:1.8}
-
-.method{background:var(--sumi);color:#EDEAE0;padding:56px 6vw 64px}
-.method-inner{max-width:1000px;margin:0 auto}
-.method .kicker{font-family:var(--mono);font-size:11px;letter-spacing:.35em;color:#B8A679}
-.method h2{font-family:'Shippori Mincho',serif;font-size:clamp(22px,3vw,30px);margin:12px 0 44px;line-height:1.6}
-.m-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:24px}
-.m-card{border-top:2px solid #B8A679;padding-top:16px;overflow-wrap:anywhere}
-.m-card b{line-height:1.6}
-.m-card b{font-family:'Shippori Mincho',serif;display:block;margin-bottom:6px;color:#fff;font-size:16px}
-.m-card p{font-size:13px;color:#C9C5B8;line-height:1.9}
-@media(max-width:960px){
-  .book-col{position:static}
-  .chip{padding:12px 18px;font-size:16px}
-  .copy-btn{font-size:16px}
-}
+#toTop{position:fixed;right:18px;bottom:18px;z-index:50;border:1px solid var(--ai);background:#fff;
+  color:var(--ai);padding:10px 16px;border-radius:999px;cursor:pointer;font-family:inherit;font-size:13px;
+  box-shadow:0 2px 8px rgba(38,36,31,.15);display:none}
+#toTop.show{display:block}
+@media(max-width:960px){.prev{position:static}.chip{padding:12px 18px;font-size:16px}.copy-btn{font-size:16px}}
 </style>
 </head>
 <body>
 
 <header class="hero">
-  <p class="kicker">Tsumugi-no-Mori ｜ Omoide-Ehon — Memory in five beats</p>
-  <h1>観た記憶が、<br><em>開く絵本</em>になる。</h1>
-  <p class="thesis">映画のワンシーンの記憶を、5つの拍で言語化する。
-  1見開き＝1拍として、そのままオリジナル3Dポップアップ絵本の設計図になる。</p>
-  <nav class="beatnav" aria-label="五拍メニュー">
-    <a href="#beat-1"><b>1 観た</b></a>
-    <a href="#beat-2"><b>2 シーン</b></a>
-    <a href="#beat-3"><b>3 物</b></a>
-    <a href="#beat-4"><b>4 その前</b></a>
-    <a href="#beat-5"><b>5 感覚</b></a>
+  <p class="kicker">Tsumugi-no-Mori ｜ From Mind to Image — four stages</p>
+  <h1>頭のなかから、<br><em>絵</em>になるまで。</h1>
+  <p class="thesis">工程は4段。飛ばしていいのは途中だけ——最初と最後は必ず通る。
+  上の帯で好きな段へ戻れる。</p>
+  <nav class="flow" aria-label="四段の流れ">
+    <a class="fstep" href="#st-0">0 頭のなか</a><span class="arr">→</span>
+    <a class="fstep" href="#st-1">1 引き出す</a><span class="arr">→</span>
+    <a class="fstep" href="#st-2">2 言葉になる</a><span class="arr">→</span>
+    <a class="fstep" href="#st-3">3 絵に仕上げる</a>
   </nav>
 </header>
 
-<main class="studio">
-  <div><!-- 五拍パネル（JS描画） --></div>
+<!-- ═══ 段0: 頭のなか ═══ -->
+<section class="stage" id="st-0">
+  <div class="stage-head"><span class="stage-no">STAGE 0</span><h2>頭のなか<small>DUMP — 制限なし</small></h2></div>
+  <p class="lead">形にしなくていい。うまく言えなくていい。浮んでいるものを、書くか置くかする。ここは誰にも見せない帳。</p>
+  <textarea class="bigTA" id="dump" placeholder="例：今朝、電車の中でふと思った。昔観た映画のワンシーン。あの停留所。赤いマフラー。あの時の匂い……絵にしたい、でも言葉が出ない。"></textarea>
+  <p class="hint">→ 書けた（あるいは置けた）ら、次の段へ。書けなくても、下の質問で引き出せる。</p>
+</section>
 
-  <aside class="book-col">
-    <div class="book" aria-live="polite">
-      <h3>見開きプレビュー</h3>
-      <div id="pageL" class="page">
-        <h4>左ページ — その前</h4>
-        <p id="pgL"><span class="empty">—</span></p>
-        <div class="fold"></div>
-        <h4>右ページ — シーン</h4>
-        <p id="pgR"><span class="empty">—</span></p>
-      </div>
-      <div class="output">
-        <h4>記憶の一文</h4>
-        <p class="out-jp" id="outJP">左の五拍から、思い出を選んでください。</p>
-        <h4 style="margin-top:14px">ポップアップ絵本プロンプト</h4>
-        <p class="out-popup" id="outPP">ポップアップ絵本の見開きプロンプトがここに出ます。</p>
-        <button class="copy-btn" id="copyJP">記憶の一文をコピー</button>
-        <button class="copy-btn ghost" id="copyPP">絵本プロンプトをコピー</button>
-        <button class="copy-btn ghost" id="dlMD">ノートとして保存（.md）</button>
-        <p class="toast" id="toast">コピーしました。</p>
-        <p class="note-tip">📄 .md はダウンロードフォルダに保存されます → ファイルアプリで Obsidian の Vault へ移すと蓄積できます。</p>
-        <button class="reset" id="reset">五拍をすべて空にする</button>
-      </div>
-    </div>
-  </aside>
-</main>
+<!-- ═══ 段1: 引き出す ═══ -->
+<section class="stage" id="st-1">
+  <div class="stage-head"><span class="stage-no">STAGE 1</span><h2>引き出す<small>PULL — 質問に答えるだけ</small></h2></div>
+  <p class="lead">頭のなかを引き出す質問を、ひとつずつ。チップを選んでも、自分の言葉でも。全部に答える必要はない。</p>
 
-<section class="method">
-  <div class="method-inner">
-    <p class="kicker">Method — なぜ五拍か</p>
-    <h2>記憶は「流れ」でしか蘇らない</h2>
-    <div class="m-grid">
-      <div class="m-card"><b>1 観た</b><p>作品名・媒体を置く。記憶の器を決める拍。</p></div>
-      <div class="m-card"><b>2 シーン</b><p>誰と誰が、どこで。一番絵になる拍。ここが見開きの右ページ。</p></div>
-      <div class="m-card"><b>3 物</b><p>着ていた・持っていた。ポップアップで「立つ」のはだいたいこの拍。</p></div>
-      <div class="m-card"><b>4 その前</b><p>直前に見ていたもの。左ページ。対比でシーンが深くなる。</p></div>
-      <div class="m-card"><b>5 感覚</b><p>思い出したこと・感覚。絵には描かない、絵本の奥行き。</p></div>
+  <div class="q"><b>何が、浮んでいる？</b>
+    <div class="chips" data-pull="seed">
+      <button class="chip">映画のワンシーン</button><button class="chip">旅先の景色</button>
+      <button class="chip">昨日見たもの</button><button class="chip">子どもの頃の場所</button>
+      <button class="chip">夢の中の光景</button><button class="chip">事業の現場の風景</button>
+      <button class="chip">誰かのまねごと</button><button class="chip">まだ言葉にならないもの</button>
     </div>
+    <div class="add-row"><input data-pullfree="seed" placeholder="自分の言葉で（任意）"><button data-pullbtn="seed">＋</button></div>
+  </div>
+
+  <div class="q"><b>そこに、誰が・何がいて？</b>
+    <div class="chips" data-pull="who">
+      <button class="chip">ひとりの人物</button><button class="chip">ふたりの並んだ姿</button>
+      <button class="chip">親子</button><button class="chip">動物</button>
+      <button class="chip">建物だけ</button><button class="chip">風景だけ、人はいない</button>
+      <button class="chip">乗り物</button><button class="chip">手元の物だけ</button>
+    </div>
+    <div class="add-row"><input data-pullfree="who" placeholder="自分の言葉で（任意）"><button data-pullbtn="who">＋</button></div>
+  </div>
+
+  <div class="q"><b>その場に、何があった？（あった・着ていた・持っていた）</b>
+    <div class="chips" data-pull="thing">
+      <button class="chip">赤いマフラー</button><button class="chip">傘</button>
+      <button class="chip">古い腕時計</button><button class="chip">手紙</button>
+      <button class="chip">ランタンの灯り</button><button class="chip">白いワンピース</button>
+      <button class="chip">踏切の音</button><button class="chip">光の粒</button>
+    </div>
+    <div class="add-row"><input data-pullfree="thing" placeholder="自分の言葉で（任意）"><button data-pullbtn="thing">＋</button></div>
+  </div>
+
+  <div class="q"><b>その直前は、どこで何を見ていた？</b>
+    <div class="chips" data-pull="before">
+      <button class="chip">窓の外を見ていた</button><button class="chip">人混みの中にいた</button>
+      <button class="chip">誰かの背中を見ていた</button><button class="chip">古い写真を見ていた</button>
+      <button class="chip">雨を見ていた</button><button class="chip">ポスターを見ていた</button>
+      <button class="chip">何も見ていなかった</button>
+    </div>
+    <div class="add-row"><input data-pullfree="before" placeholder="自分の言葉で（任意）"><button data-pullbtn="before">＋</button></div>
+  </div>
+
+  <div class="q"><b>思い出したのは、どんな感覚？</b>
+    <div class="chips" data-pull="feel">
+      <button class="chip">あたたかい感覚</button><button class="chip">切なさ</button>
+      <button class="chip">胸がじんとした</button><button class="chip">懐かしい匂い</button>
+      <button class="chip">息を止めた</button><button class="chip">時間がゆっくりになった</button>
+      <button class="chip">遠くから呼ばれた気がした</button>
+    </div>
+    <div class="add-row"><input data-pullfree="feel" placeholder="自分の言葉で（任意）"><button data-pullbtn="feel">＋</button></div>
   </div>
 </section>
 
-<script>
-const BEATS = [
-  {no:1, name:"観た", en:"WATCHED", lead:"何を観て。作品名・媒体を置く。",
-    chips:["映画","アニメ","ドラマ","舞台","本","歌","旅行の思い出","子どもの頃の絵本"],
-    freePH:"作品名（例：『千と千尋の神隠し』を観て）"},
-  {no:2, name:"シーン", en:"SCENE", lead:"誰と誰が、どこで。一番絵になる拍。",
-    chips:["夕暮れの駅のホームで","海辺を歩く二人が","朝の台所で","車窓越しに","雪の停留所で","屋上で","祭りの夜に","古い書店で","発車まぎわの電車の中で"],
-    freePH:"シーン（例：親子が、終電のホームで）"},
-  {no:3, name:"物", en:"THE THING", lead:"そこに何があった。着ていた・持っていた。ポップアップで「立つ」もの。",
-    chips:["赤いマフラーがあった","古い腕時計をしていた","傘を回していた","手紙を握っていた","自転車に乗っていた","ランタンの灯りがあった","カメラを首に下げていた","白いワンピースだった"],
-    freePH:"物（例：折り畳み傘を持っていた）"},
-  {no:4, name:"その前", en:"BEFORE", lead:"その直前に見ていたもの。見開きの左ページ。",
-    chips:["ポスターを見ていた","窓の外を見ていた","古い写真を見ていた","雨を見ていた","人混みの中にいた","誰かの背中を見ていた","看板の明かりを見ていた"],
-    freePH:"その前に見ていたもの"},
-  {no:5, name:"感覚", en:"FEELING", lead:"それを見た時に思い出した、あの感覚。",
-    chips:["あたたかい感覚がした","切なかった","胸がじんとした","懐かしい匂いがした","息を止めた","瞬間がゆっくりになった","遠くに呼ばれた気がした","昔の自分に会った気がした"],
-    freePH:"思い出したこと・感覚"}
-];
+<!-- ═══ 段2: 言葉になる ═══ -->
+<section class="stage" id="st-2">
+  <div class="stage-head"><span class="stage-no">STAGE 2</span><h2>言葉になる<small>SAY — 自動で一文に</small></h2></div>
+  <p class="lead">段1で引き出したものが、あの型で一文になる。この下の文は直接書き換えられる——あなたの言い方に磨いてよい。</p>
+  <div class="pull-line" id="pullLine"><span class="empty">段1の質問に答えると、ここに一文が立ります。</span></div>
+  <div class="add-row" style="max-width:640px">
+    <input id="refine" placeholder="↑の文を直すなら、ここに書き直す（任意）">
+    <button id="refineBtn">磨く</button>
+  </div>
+</section>
 
-const state = BEATS.map(()=>({sel:new Set(), free:""}));
-
-function panelHTML(){
-  return BEATS.map((B,bi)=>`<section class="beat" id="beat-${B.no}">
-    <div class="beat-head"><span class="beat-no">0${B.no}</span><h2>${B.name}<small>${B.en}</small></h2></div>
-    <p class="lead">${B.lead}</p>
-    <div class="chips">${B.chips.map(c=>`<button class="chip" data-b="${bi}" aria-pressed="false">${c}</button>`).join("")}</div>
-    <div class="add-row">
-      <input type="text" data-b="${bi}" placeholder="${B.freePH}">
-      <button data-b="${bi}">＋ 足す</button>
+<!-- ═══ 段3: 絵に仕上げる ═══ -->
+<section class="stage stage-finish" id="st-3">
+  <div class="stage-head"><span class="stage-no">STAGE 3</span><h2>絵に仕上げる<small>MAKE — ポップアップ／画像生成</small></h2></div>
+  <p class="lead">DB v6 の型で仕上げる。書いた文が自動で「主役」に入る。ここから先はゴール。</p>
+  <div class="finish-grid">
+    <div>
+      <div class="field"><label>主役（段2の文が自動入力・直せる）</label>
+        <input id="subject" type="text"></div>
+      <div class="field"><label>紙の立体造形 — 何が手前で、何が奥に立つか</label>
+        <textarea id="papercraft" placeholder="例：手前にベンチと標識、奥に傘を折った人影。雨粒の層を挟む"></textarea></div>
+      <div class="field"><label>動き（ループ）</label>
+        <div class="chips" id="motionChips">
+          <button class="chip">光の粒が流れる</button><button class="chip">雪／雨が舞う</button>
+          <button class="chip">灯りが揺れる</button><button class="chip">湯気・霧が流れる</button>
+          <button class="chip">水面が揺れる</button><button class="chip">小さな生き物が通る</button>
+        </div></div>
+      <div class="field"><label>光（時間帯・季節）</label>
+        <input id="light" type="text" placeholder="例：夕暮れ・ゴールデンアワー"></div>
+      <div class="field"><label>構図の型（DB「構図の型5種」）</label>
+        <div class="chips" id="lockChips">
+          <button class="chip">縦・見上げ</button><button class="chip">縦・見下ろし</button>
+          <button class="chip">横・パノラマ</button><button class="chip">横・室内対称</button>
+          <button class="chip">主役単体</button>
+        </div></div>
     </div>
-    <p class="hint">足した語は短冊（見開き）で ✎ 編集・× 削除できます。</p>
-  </section>`).join("");
-}
+    <aside>
+      <div class="prev" aria-live="polite">
+        <h3>ゴール</h3>
+        <div class="block"><b>生成プロンプト（日本語）</b><p id="outJP"><span class="empty">段3の欄を埋めると、ここに出ます。</span></p></div>
+        <div class="block en"><b>COMPOSITION LOCK (EN)</b><p id="outLock"><span class="empty">—</span></p></div>
+        <button class="copy-btn" id="copyJP">プロンプトをコピー</button>
+        <button class="copy-btn ghost" id="dlMD">ノートとして保存（.md）</button>
+        <p class="toast" id="toast">コピーしました。</p>
+      </div>
+    </aside>
+  </div>
+</section>
 
-const panel = document.querySelector(".studio > div");
-panel.innerHTML = panelHTML();
-const outJP=document.getElementById("outJP"), outPP=document.getElementById("outPP"),
-      pgL=document.getElementById("pgL"), pgR=document.getElementById("pgR"),
-      toast=document.getElementById("toast");
-const isLatin = s=>/\p{Script=Latin}/u.test(s);
-const esc = s=>s.replace(/[&<>"']/g,m=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[m]));
+<button id="toTop" aria-label="上に戻る">▲ 上へ</button>
 
-function wordsOf(bi){
-  const w=[...state[bi].sel].map(el=>el.textContent);
-  if(state[bi].free) w.push(state[bi].free);
+<script>
+const LOCKS = {
+  "縦・見上げ":"COMPOSITION LOCK (vertical, looking up): camera at waist height inside the scene, tilted up 15°, 24mm lens.",
+  "縦・見下ろし":"COMPOSITION LOCK (vertical, looking down): camera above the foreground ridge, tilted down 20°, 24mm lens.",
+  "横・パノラマ":"COMPOSITION LOCK (horizontal panorama): camera at eye level, 35mm lens, horizon at lower third.",
+  "横・室内対称":"COMPOSITION LOCK (horizontal, symmetric interior): camera on the central axis at chest height, 35mm lens, one-point perspective.",
+  "主役単体":"COMPOSITION LOCK (single hero, layered setting): camera at eye level, 50mm lens, hero centered with layered paper depth."
+};
+// 段1の状態：{質問キー: Set(チップ要素), free: str}
+const PULLS=["seed","who","thing","before","feel"];
+const pullState={}; PULLS.forEach(k=>pullState[k]={sel:new Set(), free:""});
+const finish={motion:new Set(), lock:""};
+
+const $=id=>document.getElementById(id);
+const esc=s=>s.replace(/[&<>"']/g,m=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[m]));
+
+function pullWords(k){
+  const w=[...pullState[k].sel].map(el=>el.textContent);
+  if(pullState[k].free) w.push(pullState[k].free);
   return w;
 }
-function render(){
-  panel.querySelectorAll(".chip").forEach(c=>{
-    c.setAttribute("aria-pressed", state[+c.dataset.b].sel.has(c));
+function renderPull(){
+  document.querySelectorAll(".chip[data-pull-chip]").forEach(c=>{});
+  PULLS.forEach(k=>{
+    document.querySelectorAll(`.chips[data-pull="${k}"] .chip`).forEach(c=>{
+      c.setAttribute("aria-pressed", pullState[k].sel.has(c));
+    });
   });
-  // 見開き：左＝その前、右＝シーン＋物
-  const w1=wordsOf(0), w2=wordsOf(1), w3=wordsOf(2), w4=wordsOf(3), w5=wordsOf(4);
-  pgL.innerHTML = w4.length? esc(w4.join("、")) : `<span class="empty">—</span>`;
-  pgR.innerHTML = [...w2,...w3].length? esc([...w2,...w3].join("、")) : `<span class="empty">—</span>`;
-  // 一文
-  const s1=w1.join("、"), s2=w2.join("、"), s3=w3.join("、"), s4=w4.join("、"), s5=w5.join("、");
+  // 一文組み立て
+  const seed=pullWords("seed"), who=pullWords("who"), thing=pullWords("thing"),
+        before=pullWords("before"), feel=pullWords("feel");
   let j="";
-  if(s1) j+=`${s1}を観て。`;
-  if(s2) j+=`${s2}、`;
-  if(s3) j+=`そこには${s3}。`;
-  if(j && s4) j+=`その前に${s4}。`;
-  else if(s4) j+=`${s4}を見ていた。`;
-  if(s5) j+=`${s2||s4||"それ"}を見た時に思い出した、${s5}。`;
-  outJP.textContent = j || "左の五拍から、思い出を選んでください。";
-  // 絵本プロンプト
-  const hasAny = [w1,w2,w3,w4,w5].some(w=>w.length);
-  outPP.textContent = hasAny
-    ? `3Dポップアップ絵本の見開き。左ページ（手前）：${s4||"幕"}, 右ページ（奥に立つ）：${[s2,s3].filter(Boolean).join("、")}, 紙の層で立体に、開くと動く仕掛け、温かな手作りの質感。`
-    : "ポップアップ絵本の見開きプロンプトがここに出ます。";
-  // 見開きプレビューは絵本になっているか→常に再描画ずみ
+  if(who.length||thing.length){
+    j+=`${who.join("、")||"そこに"}${thing.length?`がいて、そこには${thing.join("と")}があった`:"がいた"}。`;
+  }
+  if(before.length) j+=`その前に${before.join("、")}。`;
+  if(feel.length) j+=`${who[0]?who[0]:"それ"}を見た時に思い出した、${feel.join("、")}という感覚。`;
+  if(!j && seed.length) j=`${seed.join("、")}の記憶が、まだ形を持っている。`;
+  const line=$("pullLine");
+  if(j){ line.textContent=j; line.style.color="var(--sumi)";
+    if(!$("refine").value) $("subject").value=j;
+  } else { line.innerHTML=`<span class="empty">段1の質問に答えると、ここに一文が立ります。</span>`; }
+  renderFinish();
 }
-function wordForEdit(el){ return el; }
-
-panel.addEventListener("click", e=>{
+function renderFinish(){
+  const subject=$("subject").value.trim(), paper=$("papercraft").value.trim(), light=$("light").value.trim();
+  const motion=[...finish.motion].map(el=>el.textContent);
+  let j="";
+  if(subject||paper){ j+=`3Dポップアップアート（シネマグラフ）。`; }
+  if(subject) j+=`主役：${subject} `;
+  if(paper) j+=`紙の立体造形：${paper}。`;
+  if(motion.length) j+=`動き（ループ）：${motion.join("、")}。`;
+  if(light) j+=`光：${light}。`;
+  if(subject||paper) j+=`ペーパークラフトの質感、紙の層で奥行きをつけ、温かな手作りの光。`;
+  $("outJP").textContent = j || "";
+  $("outJP").innerHTML = j ? esc(j) : `<span class="empty">段3の欄を埋めると、ここに出ます。</span>`;
+  $("outLock").textContent = finish.lock ? LOCKS[finish.lock] : "—";
+}
+document.addEventListener("click", e=>{
   const chip=e.target.closest(".chip");
   if(chip){
-    const bi=+chip.dataset.b, s=state[bi].sel;
-    s.has(chip)?s.delete(chip):s.add(chip);
-    render(); return;
+    const key=chip.closest(".chips").dataset.pull;
+    if(key){ // 段1
+      const s=pullState[key].sel;
+      s.has(chip)?s.delete(chip):s.add(chip);
+      renderPull(); return;
+    }
+    if(chip.closest("#motionChips")){
+      finish.motion.has(chip)?finish.motion.delete(chip):finish.motion.add(chip);
+      chip.setAttribute("aria-pressed", finish.motion.has(chip)); renderFinish(); return;
+    }
+    if(chip.closest("#lockChips")){
+      document.querySelectorAll("#lockChips .chip").forEach(x=>x.setAttribute("aria-pressed",x===chip));
+      finish.lock=chip.textContent; renderFinish(); return;
+    }
   }
-  const btn=e.target.closest(".add-row button");
+  const btn=e.target.closest("[data-pullbtn]");
   if(btn){
-    const bi=+btn.dataset.b;
-    const inp=panel.querySelector(`.add-row input[data-b="${bi}"]`);
-    addWord(bi, inp.value);
+    const k=btn.dataset.pullbtn;
+    const inp=document.querySelector(`input[data-pullfree="${k}"]`);
+    const v=inp.value.trim(); if(!v) return;
+    // 自由入力は新しいチップとして追加し、選択状態にする
+    const wrap=document.querySelector(`.chips[data-pull="${k}"]`);
+    const b=document.createElement("button");
+    b.className="chip"; b.textContent=v; b.setAttribute("aria-pressed","true");
+    wrap.appendChild(b);
+    pullState[k].sel.add(b);
+    inp.value=""; renderPull();
   }
 });
-panel.addEventListener("keydown", e=>{
-  if(e.key==="Enter" && e.target.matches(".add-row input")) addWord(+e.target.dataset.b, e.target.value);
+document.addEventListener("keydown", e=>{
+  if(e.key==="Enter" && e.target.matches("[data-pullfree]")){
+    const k=e.target.dataset.pullfree;
+    document.querySelector(`button[data-pullbtn="${k}"]`).click();
+  }
 });
-function addWord(bi, text){
-  text=(text||"").trim(); if(!text) return;
-  // 自由入力は「语リスト」として保持（編集・削除は見開き側）
-  state[bi].free = state[bi].free ? state[bi].free+"、"+text : text;
-  const inp=panel.querySelector(`.add-row input[data-b="${bi}"]`); if(inp) inp.value="";
-  render();
-}
-
-/* 見開き側の編集・削除：自由入力はstringなので簡易に——削除は全体から除く */
-document.getElementById("reset").addEventListener("click", ()=>{
-  state.forEach(s=>{s.sel.clear(); s.free="";});
-  panel.querySelectorAll(".add-row input").forEach(i=>i.value="");
-  render();
+document.addEventListener("input", e=>{
+  if(["subject","papercraft","light"].includes(e.target.id)) renderFinish();
 });
-
-function copy(text, btn){
-  const done=()=>{ toast.classList.add("show");
-    btn.dataset.orig=btn.textContent; btn.textContent="コピーしました ✓";
-    setTimeout(()=>{toast.classList.remove("show"); btn.textContent=btn.dataset.orig;},1400); };
-  const fb=()=>{ const ta=document.createElement("textarea"); ta.value=text;
-    document.body.appendChild(ta); ta.select(); document.execCommand("copy"); ta.remove(); done(); };
-  if(navigator.clipboard && navigator.clipboard.writeText)
-    navigator.clipboard.writeText(text).then(done).catch(fb);
-  else fb();
-}
-document.getElementById("copyJP").addEventListener("click", e=>copy(outJP.textContent, e.target));
-document.getElementById("copyPP").addEventListener("click", e=>copy(outPP.textContent, e.target));
-
-document.getElementById("dlMD").addEventListener("click", ()=>{
-  const d=new Date();
-  const md=`## おもいで絵本（${d.getFullYear()}-${String(d.getMonth()+1).padStart(2,"0")}-${String(d.getDate()).padStart(2,"0")}）\n`
-    + BEATS.map((B,bi)=>{const w=wordsOf(bi); return w.length?`- **${B.name}**: ${w.join("、")}`:"";}).filter(Boolean).join("\n")
-    + `\n\n> ${outJP.textContent}\n>\n> 絵本プロンプト: ${outPP.textContent}`;
+$("refineBtn").addEventListener("click", ()=>{
+  const v=$("refine").value.trim(); if(!v) return;
+  $("pullLine").textContent=v; $("subject").value=v; renderFinish();
+});
+$("copyJP").addEventListener("click", e=>{
+  const t=$("outJP").textContent;
+  const done=()=>{ $("toast").classList.add("show"); e.target.dataset.orig=e.target.textContent;
+    e.target.textContent="コピーしました ✓";
+    setTimeout(()=>{$("toast").classList.remove("show"); e.target.textContent=e.target.dataset.orig;},1400); };
+  if(navigator.clipboard&&navigator.clipboard.writeText) navigator.clipboard.writeText(t).then(done).catch(fb); else fb();
+  function fb(){const ta=document.createElement("textarea");ta.value=t;document.body.appendChild(ta);ta.select();document.execCommand("copy");ta.remove();done();}
+});
+$("dlMD").addEventListener("click", ()=>{
+  const d=new Date(), ymd=`${d.getFullYear()}-${String(d.getMonth()+1).padStart(2,"0")}-${String(d.getDate()).padStart(2,"0")}`;
+  const L=k=>pullWords(k).join("、");
+  const md=`## 頭のなか→絵（${ymd}）\n### 0 頭のなか\n${$("dump").value||"—"}\n\n### 1 引き出したもの\n- 浮んでいるもの: ${L("seed")||"—"}\n- 誰が・何が: ${L("who")||"—"}\n- そこにあった物: ${L("thing")||"—"}\n- その前: ${L("before")||"—"}\n- 感覚: ${L("feel")||"—"}\n\n### 2 言葉\n> ${$("pullLine").textContent}\n\n### 3 プロンプト\n> ${$("outJP").textContent}\n>\n> ${$("outLock").textContent}`;
   const blob=new Blob([md],{type:"text/markdown"});
-  const a=document.createElement("a");
-  a.href=URL.createObjectURL(blob);
-  a.download=`おもいで絵本_${d.getFullYear()}-${String(d.getMonth()+1).padStart(2,"0")}-${String(d.getDate()).padStart(2,"0")}.md`;
-  document.body.appendChild(a); a.click(); a.remove();
+  const a=document.createElement("a"); a.href=URL.createObjectURL(blob);
+  a.download=`紡ぎの四段_${ymd}.md`; document.body.appendChild(a); a.click(); a.remove();
   setTimeout(()=>URL.revokeObjectURL(a.href),2000);
-  toast.textContent="ノートを保存しました（ダウンロードへ）。"; toast.classList.add("show");
-  setTimeout(()=>toast.classList.remove("show"),1800);
+  $("toast").textContent="ノートを保存しました（ダウンロードへ）。"; $("toast").classList.add("show");
+  setTimeout(()=>$("toast").classList.remove("show"),1800);
 });
-
-render();
+const toTop=$("toTop");
+window.addEventListener("scroll", ()=>toTop.classList.toggle("show", scrollY>600), {passive:true});
+toTop.addEventListener("click", ()=>scrollTo({top:0,behavior:"smooth"}));
 </script>
 <script type="module" src="https://static.cloudflareinsights.com/beacon.min.js/vce701823e78c4301a35b7e07294d87301792088814092" integrity="sha512-UKNk8GbxkABxKcXYuLkO16EleLGUkcvJWtpSNmExE0Too3ZaFAxTscNWEc1OdAv5/BikHawapSCaiD2XCmp+Bw==" data-cf-beacon='{"version":"2024.11.0","token":"4edd5f8ec12a48cfa682ab8261b80a79","spa":2}' crossorigin="anonymous"></script>
 </body>
