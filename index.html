@@ -236,11 +236,22 @@ footer{padding:28px 6vw;text-align:center;font-size:12px;color:var(--sumi-soft)}
   .preset{padding:12px 26px;font-size:16px}
   .free-input,.free{font-size:16px}
   .studio{gap:36px;padding:40px 5vw 64px}
+  .out-en,.out-jp,.tz-words,.impression{overflow-wrap:anywhere;word-break:normal}
+  .out-en{font-size:12px}
+  .framework .step span{max-width:100%}
+  .framework .step{flex-wrap:wrap;max-width:100%}
+  .hero .thesis{overflow-wrap:anywhere}
+  .add-row{display:flex;max-width:100%}
+  .add-row input{min-width:0;flex:1;width:auto}
+  .output,.tanzaku{max-width:100%;overflow-wrap:anywhere}
+  .chips{max-width:100%}
+  .chip{max-width:100%}
 }
 @media(max-width:640px){
   .hero{padding:48px 5vw 36px}
   .framework .step{width:100%}
   .m-grid{grid-template-columns:1fr}
+  body{font-size:17px}   /* 文字サイズを大きくしている場合でもレイアウト維持 */
 }
 </style>
 </head>
