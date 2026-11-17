@@ -1,0 +1,587 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>紬の杜 — 五層の言葉｜情景・物質をプロンプトに変える装置</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Shippori+Mincho:wght@500;600;800&family=Zen+Kaku+Gothic+New:wght@400;500;700&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+:root{
+  --washi:#F0EFE8;
+  --washi-deep:#E6E4D9;
+  --sumi:#26241F;
+  --sumi-soft:#5B574C;
+  --ai:#2E4A6B;
+  --ai-veil:rgba(46,74,107,.10);
+  --hi:#B3402E;
+  --kin:#8F7742;
+  --line:#D4D1C4;
+  --mono:'IBM Plex Mono',monospace;
+}
+*{margin:0;padding:0;box-sizing:border-box}
+html{scroll-behavior:smooth}
+html,body{overflow-x:clip}
+body{
+  background:var(--washi);
+  color:var(--sumi);
+  font-family:'Zen Kaku Gothic New',sans-serif;
+  font-size:15px;line-height:1.75;
+  -webkit-font-smoothing:antialiased;
+  overflow-wrap:anywhere;
+}
+@media (prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}}
+::selection{background:var(--ai);color:#fff}
+
+/* ───── 開幕 ───── */
+.hero{
+  padding:72px 6vw 48px;
+  border-bottom:1px solid var(--line);
+  position:relative;
+}
+.hero .kicker{
+  font-family:var(--mono);font-size:12px;letter-spacing:.35em;
+  color:var(--kin);text-transform:uppercase;
+}
+.hero h1{
+  font-family:'Shippori Mincho',serif;font-weight:800;
+  font-size:clamp(34px,5.4vw,60px);line-height:1.25;
+  margin:.5em 0 .35em;letter-spacing:.02em;
+}
+.hero h1 em{font-style:normal;color:var(--ai);border-bottom:6px solid var(--ai-veil)}
+.hero .thesis{
+  font-family:'Shippori Mincho',serif;font-size:clamp(16px,1.9vw,20px);
+  max-width:46em;color:var(--sumi-soft);
+}
+.framework{display:flex;flex-wrap:wrap;gap:10px;margin-top:32px}
+.framework .step{
+  display:flex;align-items:baseline;gap:8px;
+  border:1px solid var(--line);background:var(--washi-deep);
+  padding:8px 16px;border-radius:2px;
+}
+.framework .step b{font-family:'Shippori Mincho',serif;font-size:17px;color:var(--ai)}
+.framework .step span{font-size:12px;color:var(--sumi-soft)}
+a.framework .step, .framework a.step{text-decoration:none;cursor:pointer;transition:all .15s}
+.framework a.step:hover{border-color:var(--ai);background:var(--ai-veil)}
+.layer{scroll-margin-top:16px}
+
+/* ───── 本体 ───── */
+.studio{
+  display:grid;grid-template-columns:1fr 300px;gap:48px;
+  padding:56px 6vw 80px;align-items:start;
+  max-width:1240px;margin:0 auto;
+}
+@media(max-width:960px){.studio{grid-template-columns:1fr}}
+
+/* ───── 五層パネル ───── */
+.layer{margin-bottom:52px}
+.layer-head{display:flex;align-items:baseline;gap:14px;margin-bottom:6px}
+.layer-no{font-family:var(--mono);font-size:12px;color:var(--kin);letter-spacing:.2em}
+.layer-head h2{
+  font-family:'Shippori Mincho',serif;font-size:26px;font-weight:600;letter-spacing:.04em;
+}
+.layer-head h2 small{font-size:13px;color:var(--sumi-soft);font-weight:500;letter-spacing:.15em;margin-left:10px}
+.layer>.lead{color:var(--sumi-soft);font-size:13.5px;margin-bottom:18px;max-width:40em}
+.chips{display:flex;flex-wrap:wrap;gap:8px}
+.chip{
+  border:1px solid var(--line);background:#fff;
+  padding:7px 14px;border-radius:2px;cursor:pointer;
+  font-size:13.5px;font-family:inherit;color:var(--sumi);
+  transition:all .15s ease;
+}
+.chip:hover{border-color:var(--ai);color:var(--ai)}
+.chip[aria-pressed="true"]{background:var(--ai);border-color:var(--ai);color:#fff;box-shadow:0 1px 0 rgba(38,36,31,.25)}
+.chip:focus-visible{outline:2px solid var(--hi);outline-offset:2px}
+.cat{font-size:11px;letter-spacing:.25em;color:var(--kin);margin:18px 0 8px;font-family:var(--mono)}
+.add-row{display:flex;gap:6px;margin-top:16px;max-width:420px}
+.add-row input{
+  flex:1;border:1px solid var(--line);background:#fff;
+  padding:7px 12px;border-radius:2px;font-family:inherit;font-size:13.5px;color:var(--sumi);
+}
+.add-row input:focus{outline:none;border-color:var(--ai)}
+.add-row input::placeholder{color:#B4B0A2}
+.add-row button{
+  border:1px solid var(--ai);background:var(--ai);color:#fff;
+  padding:0 16px;border-radius:2px;cursor:pointer;font-family:inherit;font-size:13.5px;
+}
+.add-row button:hover{filter:brightness(1.15)}
+.add-row button:focus-visible{outline:2px solid var(--hi);outline-offset:2px}
+.hint{font-size:11.5px;color:var(--sumi-soft);margin-top:8px}
+
+/* ───── 短冊 ───── */
+.tanzaku-col{position:sticky;top:24px}
+.tanzaku{
+  background:linear-gradient(180deg,#FBFAF5 0%,#F4F2E8 100%);
+  border:1px solid var(--line);
+  box-shadow:2px 3px 0 rgba(38,36,31,.08);
+  padding:26px 20px 30px;position:relative;
+}
+.tanzaku::before{
+  content:"";position:absolute;top:12px;left:50%;transform:translateX(-50%);
+  width:10px;height:10px;border-radius:50%;
+  border:2px solid var(--kin);background:var(--washi);
+}
+.tanzaku h3{font-family:var(--mono);font-size:11px;letter-spacing:.3em;color:var(--kin);text-align:center;margin:14px 0 6px}
+.tanzaku .sub{font-size:11px;color:#A09B8C;text-align:center;margin-bottom:18px}
+.tz-rows{display:flex;flex-direction:column;gap:16px}
+.tz-row{display:flex;gap:12px}
+.tz-label{
+  writing-mode:vertical-rl;font-family:'Shippori Mincho',serif;
+  font-size:12px;letter-spacing:.3em;color:#fff;
+  background:var(--ai);padding:8px 3px;align-self:stretch;
+  border-radius:1px;min-height:34px;
+}
+.tz-row:nth-child(2) .tz-label{background:#3D5E85}
+.tz-row:nth-child(3) .tz-label{background:#516F93}
+.tz-row:nth-child(4) .tz-label{background:#647F9E}
+.tz-row:nth-child(5) .tz-label{background:#7C8FA6}
+.tz-words{font-family:'Shippori Mincho',serif;font-size:14px;line-height:1.9;flex:1;display:flex;flex-direction:column;gap:2px}
+.tz-words .empty{color:#B4B0A2;font-size:12px;font-family:'Zen Kaku Gothic New',sans-serif}
+.tz-word{display:flex;align-items:flex-start;gap:6px;border-bottom:1px dotted var(--line);padding-bottom:2px}
+.tz-word .wtext{flex:1;min-width:0;word-break:break-word}
+.tz-word button{
+  border:none;background:none;cursor:pointer;color:#A09B8C;
+  font-size:11px;padding:0 2px;line-height:1.9;flex:none;
+}
+.tz-word button:hover{color:var(--hi)}
+.tz-word button:focus-visible{outline:2px solid var(--hi);outline-offset:1px}
+.tz-edit{
+  width:100%;border:none;border-bottom:1px dashed var(--ai);
+  background:transparent;font-family:'Shippori Mincho',serif;font-size:14px;color:var(--sumi);
+}
+.tz-edit:focus{outline:none}
+
+/* ───── 出力 ───── */
+.output{margin-top:22px;border:1px solid var(--line);background:#fff;padding:22px;border-radius:2px}
+.output h4{font-family:var(--mono);font-size:11px;letter-spacing:.3em;color:var(--kin);margin-bottom:10px}
+.out-jp{font-family:'Shippori Mincho',serif;font-size:15.5px;line-height:2;min-height:3em}
+.out-en{
+  font-family:var(--mono);font-size:12.5px;line-height:1.8;color:var(--ai);
+  margin-top:16px;padding-top:14px;border-top:1px dashed var(--line);
+  min-height:2em;word-break:break-word;
+}
+.copy-btn{
+  margin-top:16px;width:100%;padding:11px;border:none;cursor:pointer;
+  background:var(--hi);color:#fff;font-family:inherit;font-size:14px;font-weight:700;
+  letter-spacing:.2em;border-radius:2px;transition:filter .15s;
+}
+.copy-btn:hover{filter:brightness(1.1)}
+.copy-btn:focus-visible{outline:2px solid var(--sumi);outline-offset:2px}
+.copy-btn.ghost{background:transparent;color:var(--ai);border:1px solid var(--ai);margin-top:8px}
+.toast{font-size:12px;color:var(--ai);text-align:center;height:1.4em;margin-top:8px;opacity:0;transition:opacity .2s}
+.toast.show{opacity:1}
+.reset{
+  margin-top:14px;width:100%;background:none;border:none;cursor:pointer;
+  font-family:inherit;font-size:12px;color:var(--sumi-soft);text-decoration:underline;
+}
+
+/* ───── プリセット ───── */
+.presets{padding:0 6vw 64px;max-width:1240px;margin:0 auto}
+.presets h2{font-family:'Shippori Mincho',serif;font-size:24px;margin-bottom:6px}
+.presets>p{color:var(--sumi-soft);font-size:13.5px;margin-bottom:20px}
+.preset-row{display:flex;flex-wrap:wrap;gap:12px}
+.preset{
+  border:1px solid var(--ai);background:var(--ai-veil);color:var(--ai);
+  padding:10px 22px;border-radius:2px;cursor:pointer;
+  font-size:15px;transition:all .15s;font-family:inherit;
+}
+.preset:hover{background:var(--ai);color:#fff}
+.preset:focus-visible{outline:2px solid var(--hi);outline-offset:2px}
+
+/* ───── 方法論 ───── */
+.method{background:var(--sumi);color:#EDEAE0;padding:64px 6vw 72px}
+.method-inner{max-width:1000px;margin:0 auto}
+.method .kicker{font-family:var(--mono);font-size:11px;letter-spacing:.35em;color:#B8A679}
+.method h2{font-family:'Shippori Mincho',serif;font-size:clamp(24px,3vw,34px);margin:14px 0 40px;font-weight:600}
+.m-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:28px}
+.m-card{border-top:2px solid #B8A679;padding-top:14px}
+.m-card b{font-family:'Shippori Mincho',serif;font-size:18px;display:block;margin-bottom:8px;color:#fff}
+.m-card b i{font-style:normal;font-family:var(--mono);font-size:11px;color:#B8A679;margin-right:8px}
+.m-card p{font-size:13px;color:#C9C5B8;line-height:1.9}
+.method .note{
+  margin-top:44px;font-size:13px;color:#C9C5B8;max-width:52em;
+  border-left:3px solid #B8A679;padding-left:16px;line-height:2;
+}
+footer{padding:28px 6vw;text-align:center;font-size:12px;color:var(--sumi-soft)}
+@media(max-width:960px){.tanzaku-col{position:static}}
+/* ───── スマホ最適化 ───── */
+@media(max-width:960px){
+  body{font-size:16px}                     /* iOSの自動拡大を防ぐ16px以上 */
+  .chips{gap:10px}
+  .chip{padding:11px 18px;font-size:16px}  /* 指で押せるサイズへ */
+  .add-row{max-width:none}
+  .add-row input{padding:12px 14px;font-size:16px}
+  .add-row button{padding:12px 22px;font-size:15px}
+  .tz-word button{font-size:16px;padding:6px 8px}  /* ✎ × のタップ領域を拡大 */
+  .tz-words{font-size:16px}
+  /* 短冊ラベルはスマホでは横書きに切替（縦書きの重なりを構造的に回避） */
+  .tz-row{flex-direction:column;gap:4px}
+  .tz-label{
+    writing-mode:horizontal-tb;
+    display:inline-block;align-self:flex-start;
+    padding:2px 12px;min-height:0;font-size:13px;letter-spacing:.3em;
+  }
+  .copy-btn{padding:14px;font-size:16px}
+  .preset{padding:12px 26px;font-size:16px}
+  .free-input,.free{font-size:16px}
+  .studio{gap:36px;padding:40px 5vw 64px}
+}
+@media(max-width:640px){
+  .hero{padding:48px 5vw 36px}
+  .framework .step{width:100%}
+  .m-grid{grid-template-columns:1fr}
+}
+</style>
+</head>
+<body>
+
+<header class="hero">
+  <p class="kicker">Tsumugi-no-Mori ｜ Scene → Language → Prompt</p>
+  <h1>見えたものを、<br>まだ誰も使ったことのない<em>言葉</em>で言う。</h1>
+  <p class="thesis">情景や物質は、そのままではAIに届かない。届くのは言葉だけだ。
+  この装置は、目の前の光景を<b>「場・物質・光・気配・動き」の五層</b>に分解し、
+  一枚の短冊に言語化していく。選んだ語はその場で一句のプロンプトになる。</p>
+  <div class="framework" aria-label="五層の構成（押すと各層へジャンプします）">
+    <a class="step" href="#layer-1"><b>壱　場</b><span>空間と時間の座標</span></a>
+    <a class="step" href="#layer-2"><b>弐　物質</b><span>素材・質感・温度</span></a>
+    <a class="step" href="#layer-3"><b>参　光</b><span>方向・色温度・影</span></a>
+    <a class="step" href="#layer-4"><b>肆　気配</b><span>匂い・音・湿度・心</span></a>
+    <a class="step" href="#layer-5"><b>伍　動き</b><span>変化と時間の流れ</span></a>
+  </div>
+</header>
+
+<main class="studio">
+  <div><!-- 五層パネル（JSが描画） --></div>
+
+  <aside class="tanzaku-col">
+    <div class="tanzaku" aria-live="polite">
+      <h3>短冊 — 言葉の帳</h3>
+      <p class="sub">✎ で直す、× で消す——ここが原文</p>
+      <div class="tz-rows" id="tanzaku"></div>
+      <div class="output">
+        <h4>プロンプト（日本語）</h4>
+        <p class="out-jp" id="outJP">下の五層から、今日見えたものを選んでください。</p>
+        <h4 style="margin-top:14px">PROMPT (EN)</h4>
+        <p class="out-en" id="outEN">Select what you saw in the five layers below.</p>
+        <button class="copy-btn" id="copyJP">日本語を写す</button>
+        <button class="copy-btn ghost" id="copyEN">EN を写す</button>
+        <p class="toast" id="toast">写しました。</p>
+        <p class="hint" style="text-align:center">※ 入力・コピーはすべてこの端末内だけで完結します。どこにも送信・保存されません。</p>
+        <button class="reset" id="reset">五層をすべて空にする</button>
+      </div>
+    </div>
+  </aside>
+</main>
+
+<section class="presets">
+  <h2>まず通して見る</h2>
+  <p>三つの場面を、五層ですでに言語化してある。押せば短冊に流れ込む。流れ込んだ後も直せる。</p>
+  <div class="preset-row">
+    <button class="preset" data-preset="0">雨の朝の銅板</button>
+    <button class="preset" data-preset="1">古い旅館の廊下、冬</button>
+    <button class="preset" data-preset="2">幕が上がる前の客席</button>
+  </div>
+</section>
+
+<section class="method">
+  <div class="method-inner">
+    <p class="kicker">Method — なぜ五層なのか</p>
+    <h2>言語化は「一語で済ませない」ことから始まる</h2>
+    <div class="m-grid">
+      <div class="m-card"><b><i>壱</i>場 — 座標を置く</b><p>「どこか」ではなく「夜明け前の防波堤」。場は空間と時間の両方で指定する。時間が入ると光の色まで一括で決まる。</p></div>
+      <div class="m-card"><b><i>弐</i>物質 — 手に取れる語を選ぶ</b><p>「古い」より「錆びた銅」。質感の語は視覚・触覚・温度を同時に運ぶ。AIも人も、物質名から細部を勝手に補完してくれる。</p></div>
+      <div class="m-card"><b><i>参</i>光 — 影まで書く</b><p>光の語には必ず影の裏面がある。「障子越しの拡散光」と書けば、影は濃くならない。光と影をセットで言語化する。</p></div>
+      <div class="m-card"><b><i>肆</i>気配 — 五感と心を渡す</b><p>匂い・音・湿度は絵に見えないからこそ、全体の温度を決める。「線香の匂い」一つで空間の用途まで決まる。</p></div>
+      <div class="m-card"><b><i>伍</i>動き — 時間を流す</b><p>静止画にも「直前と直後」を書く。「水滴が伝う」「煙がもつれる」。動きの語があるだけで、絵は瞬間から場面になる。</p></div>
+    </div>
+    <p class="note">使い方は二通り。<b>その一</b>：目の前の情景を五層で言葉にする練習帳として（毎日一枚、短冊に書く）。
+    <b>その二</b>：生成AIへのプロンプト下書きとして（日本語のままでも、写した英語でも）。
+    語彙は自分の現場で増やしていく——劇団なら舞台用語、事業なら現場の言葉を、「＋ 足す」から入れてほしい。</p>
+  </div>
+</section>
+
+<footer>紬の杜 tsumugi-no-mori ｜ 五層の言葉 — 情景・物質の言語化装置 ｜ AI共創・Fukumadou の創作補助として</footer>
+
+<script>
+const LAYERS = [
+  { no:"壱", name:"場", en:"PLACE",
+    lead:"空間と時間の座標。時間帯を含めると光まで一括で決まる。",
+    chips:[
+      {jp:"夜明け前の防波堤",en:"a breakwater before dawn"},
+      {jp:"梅雨の木造アパートの一室",en:"a room in a wooden apartment in the rainy season"},
+      {jp:"冬の古い旅館の廊下",en:"a corridor of an old ryokan in winter"},
+      {jp:"暗転した劇場の客席",en:"the darkened auditorium of a theater"},
+      {jp:"朝の魚市場",en:"a fish market in the morning"},
+      {jp:"雨のコンクリート階段",en:"concrete stairs in the rain"},
+      {jp:"稽古場の午後",en:"a rehearsal studio in the afternoon"},
+      {jp:"夜の台所",en:"a kitchen at night"},
+      {jp:"海辺の岩場",en:"a rocky shore by the sea"},
+      {jp:"廃校の体育館",en:"the gymnasium of an abandoned school"},
+      {jp:"茶室",en:"a tea room"},
+      {jp:"山の稜線",en:"a mountain ridge line"}
+    ]},
+  { no:"弐", name:"物質", en:"MATTER",
+    lead:"「古い」より「錆びた銅」。物質名が視覚・触覚・温度を一度に運ぶ。",
+    cats:[
+      {label:"金属",chips:[
+        {jp:"錆びた銅板",en:"weathered copper sheet"},
+        {jp:"磨かれた真鍮",en:"polished brass"},
+        {jp:"錫の茶托",en:"a tin saucer"},
+        {jp:"鉄の鋲",en:"iron rivets"}]},
+      {label:"鉱物・土",chips:[
+        {jp:"湿った玄武岩",en:"wet basalt"},
+        {jp:"御影石の台",en:"a granite counter"},
+        {jp:"乾いた粘土",en:"dry clay"},
+        {jp:"胡粉の壁",en:"a gesso plaster wall"}]},
+      {label:"有機・布",chips:[
+        {jp:"松の木目",en:"pine wood grain"},
+        {jp:"藁",en:"rice straw"},
+        {jp:"麻の布",en:"linen cloth"},
+        {jp:"埃を被ったビロード",en:"dust-softened velvet"}]},
+      {label:"人工",chips:[
+        {jp:"磨りガラス",en:"frosted glass"},
+        {jp:"ビニールシート",en:"a plastic sheet"},
+        {jp:"刻まれた木の柱",en:"a scarred wooden pillar"},
+        {jp:"白磁の碗",en:"a white porcelain bowl"}]}
+    ]},
+  { no:"参", name:"光", en:"LIGHT",
+    lead:"光の語には影の裏面がついてくる。光と影をセットで選ぶ。",
+    chips:[
+      {jp:"障子越しの拡散光",en:"light diffused through shoji paper, soft shadows"},
+      {jp:"直射の鋭い光と長い影",en:"hard direct light with long sharp shadows"},
+      {jp:"蝋燭の揺らぎ",en:"the flicker of candlelight"},
+      {jp:"蛍光灯の白色",en:"flat white fluorescent light"},
+      {jp:"逆光の縁取り",en:"backlit rim light"},
+      {jp:"藍色の黄昏",en:"indigo twilight"},
+      {jp:"水銀灯の青白さ",en:"the pallid blue of a mercury-vapor lamp"},
+      {jp:"窓から差す斜めの午後の光",en:"slanted afternoon light through a window"},
+      {jp:"影は濃く、深い",en:"deep, dense shadows"}
+    ]},
+  { no:"肆", name:"気配", en:"AIR",
+    lead:"匂い・音・湿度は絵に見えないからこそ、全体の温度を決める。",
+    chips:[
+      {jp:"潮の匂い",en:"the smell of the tide"},
+      {jp:"線香の匂い",en:"the scent of incense"},
+      {jp:"湿度が紙にしみる",en:"humidity soaked into paper"},
+      {jp:"静寂に響く足音",en:"footsteps echoing in silence"},
+      {jp:"誰かの気配",en:"the faint presence of someone"},
+      {jp:"空気が澄んで冷たい",en:"clear, cold air"},
+      {jp:"湯気と醤油の匂い",en:"steam and the smell of soy sauce"},
+      {jp:"埃が舞っている",en:"dust motes adrift"},
+      {jp:"幕が上がる前の息止め",en:"the held breath before the curtain rises"}
+    ]},
+  { no:"伍", name:"動き", en:"MOTION",
+    lead:"静止画にも「直前と直後」を。動きの語で瞬間が場面になる。",
+    chips:[
+      {jp:"水滴が縁を伝う",en:"a droplet trailing down the edge"},
+      {jp:"煙がもつれながら昇る",en:"smoke rising in tangles"},
+      {jp:"布が風でふくれる",en:"cloth billowing in the wind"},
+      {jp:"幕が上がりはじめる",en:"the curtain just starting to rise"},
+      {jp:"水面がゆれる",en:"the water surface trembling"},
+      {jp:"時が止まっている",en:"time held still"},
+      {jp:"誰かが去った直後",en:"the moment right after someone left"},
+      {jp:"埃がゆっくり沈む",en:"dust slowly settling"}
+    ]}
+];
+
+/* プリセット：層インデックス → 選ぶチップのjp配列（+ freeは独自語として追加） */
+const PRESETS = [
+  { // 雨の朝の銅板
+    0:{jp:["朝の魚市場"]}, // placeholder, overwritten below
+  }
+];
+PRESETS.length = 0;
+PRESETS.push(
+  { 0:["雨のコンクリート階段"], 1:["錆びた銅板"], 2:["障子越しの拡散光","影は濃く、深い"], 3:["潮の匂い"], 4:["水滴が縁を伝う"],
+    free:{0:"低い雲が垂れ込めた朝"} },
+  { 0:["冬の古い旅館の廊下"], 1:["松の木目","磨りガラス"], 2:["障子越しの拡散光","影は濃く、深い"], 3:["線香の匂い","静寂に響く足音"], 4:["誰かが去った直後"],
+    free:{0:"雪のにおいのする明け方"} },
+  { 0:["暗転した劇場の客席"], 1:["埃を被ったビロード"], 2:["蛍光灯の白色"], 3:["幕が上がる前の息止め"], 4:["幕が上がりはじめる","時が止まっている"] }
+);
+
+/* 状態：各層 = 選ばれた語の配列 [{jp, en, chipEl|null}] */
+const state = LAYERS.map(()=>({words:[]}));
+
+const allChips = []; // {el, li, jp, en}
+
+function panelHTML(){
+  let h = "";
+  LAYERS.forEach((L,li)=>{
+    h += `<section class="layer" id="layer-${li+1}">
+      <div class="layer-head"><span class="layer-no">第${L.no}層</span>
+      <h2>${L.name}<small>${L.en}</small></h2></div>
+      <p class="lead">${L.lead}</p>
+      <div class="chips">` +
+      (L.chips||[]).map(c=>`<button class="chip" aria-pressed="false">${c.jp}</button>`).join("") +
+      `</div>`;
+    if(L.cats){
+      L.cats.forEach(cat=>{
+        h += `<p class="cat">${cat.label}</p><div class="chips">` +
+          cat.chips.map(c=>`<button class="chip" aria-pressed="false">${c.jp}</button>`).join("") + `</div>`;
+      });
+    }
+    h += `<div class="add-row">
+        <input type="text" data-l="${li}" placeholder="ほしい語がなければ、ここに打って足す">
+        <button data-l="${li}" aria-label="第${L.no}層に語を足す">＋ 足す</button>
+      </div>
+      <p class="hint">足した語も、右の短冊で ✎ 編集・× 削除できます。</p>
+      </section>`;
+  });
+  return h;
+}
+
+const studioPanel = document.querySelector(".studio > div");
+studioPanel.innerHTML = panelHTML();
+
+// チップ登録（クリック委譲用に要素とデータを対応させる）
+studioPanel.querySelectorAll(".chip").forEach(el=>{
+  const jp = el.textContent;
+  let found = null;
+  for(const L of LAYERS){
+    if(L.chips) { const c = L.chips.find(c=>c.jp===jp); if(c){ found = c; break; } }
+    if(L.cats) for(const cat of L.cats){ const c = cat.chips.find(c=>c.jp===jp); if(c){ found = c; break; } }
+    if(found) break;
+  }
+  allChips.push({el, jp, en: found ? found.en : "", layerIdx: LAYERS.findIndex(L=>
+    (L.chips && L.chips.some(c=>c.jp===jp)) || (L.cats && L.cats.some(cat=>cat.chips.some(c=>c.jp===jp))))});
+});
+
+const tanzakuEl = document.getElementById("tanzaku");
+const outJP = document.getElementById("outJP");
+const outEN = document.getElementById("outEN");
+const toast = document.getElementById("toast");
+
+function layerOfChip(el){
+  return allChips.find(c=>c.el===el);
+}
+
+function render(){
+  // チップの押下状態
+  allChips.forEach(c=>{
+    const on = state[c.layerIdx].words.some(w=>w.chipEl===c.el);
+    c.el.setAttribute("aria-pressed", on);
+  });
+  // 短冊
+  tanzakuEl.innerHTML = LAYERS.map((L,li)=>{
+    const ws = state[li].words;
+    const body = ws.length
+      ? ws.map((w,i)=>`<span class="tz-word" data-l="${li}" data-i="${i}">
+            <span class="wtext">${escapeHTML(w.jp)}</span>
+            <button class="w-edit" title="この言葉を直す" aria-label="編集">✎</button>
+            <button class="w-del" title="この言葉を消す" aria-label="削除">×</button>
+          </span>`).join("")
+      : `<span class="empty">—</span>`;
+    return `<div class="tz-row"><span class="tz-label">${L.name}</span><span class="tz-words">${body}</span></div>`;
+  }).join("");
+  // 出力
+  const jps = state.flatMap((s,li)=>s.words.map(w=>w.jp));
+  const ens = state.flatMap(s=>s.words.map(w=>w.en)).filter(Boolean);
+  outJP.textContent = jps.length ? jps.join("、") + "。" : "下の五層から、今日見えたものを選んでください。";
+  outEN.textContent = ens.length ? ens.join(", ") : "Select what you saw in the five layers below.";
+}
+
+function escapeHTML(s){ return s.replace(/[&<>"']/g, m=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[m])); }
+const isLatin = s => /\p{Script=Latin}/u.test(s);
+
+/* ── 操作 ── */
+studioPanel.addEventListener("click", e=>{
+  const chip = e.target.closest(".chip");
+  if(chip){
+    const c = layerOfChip(chip), li = c.layerIdx, words = state[li].words;
+    const at = words.findIndex(w=>w.chipEl===chip);
+    at >= 0 ? words.splice(at,1) : words.push({jp:c.jp, en:c.en, chipEl:chip});
+    render(); return;
+  }
+  const addBtn = e.target.closest(".add-row button");
+  if(addBtn){
+    const li = +addBtn.dataset.l;
+    const inp = studioPanel.querySelector(`.add-row input[data-l="${li}"]`);
+    addWord(li, inp.value);
+  }
+});
+
+studioPanel.addEventListener("keydown", e=>{
+  if(e.key==="Enter" && e.target.classList.contains("add-row")===false && e.target.matches(".add-row input")){
+    const li = +e.target.dataset.l;
+    addWord(li, e.target.value);
+  }
+});
+
+function addWord(li, text){
+  text = text.trim();
+  if(!text) return;
+  state[li].words.push({jp:text, en: isLatin(text) ? text : "", chipEl:null});
+  const inp = studioPanel.querySelector(`.add-row input[data-l="${li}"]`);
+  if(inp) inp.value = "";
+  render();
+}
+
+/* 短冊上の編集・削除 */
+tanzakuEl.addEventListener("click", e=>{
+  const row = e.target.closest(".tz-word");
+  if(!row) return;
+  const li = +row.dataset.l, i = +row.dataset.i, w = state[li].words[i];
+  if(e.target.classList.contains("w-del")){
+    state[li].words.splice(i,1); render(); return;
+  }
+  if(e.target.classList.contains("w-edit")){
+    const wtext = row.querySelector(".wtext");
+    const inp = document.createElement("input");
+    inp.className = "tz-edit"; inp.value = w.jp;
+    wtext.replaceWith(inp);
+    inp.focus(); inp.select();
+    const save = ()=>{ const v = inp.value.trim();
+      if(v && v !== w.jp){ w.jp = v; if(!isLatin(v)) w.en = ""; }
+      render(); };
+    inp.addEventListener("blur", save);
+    inp.addEventListener("keydown", ev=>{ if(ev.key==="Enter") inp.blur(); if(ev.key==="Escape"){ inp.value = w.jp; inp.blur(); } });
+  }
+});
+
+/* プリセット */
+function applyPreset(P){
+  clearAll();
+  for(const k in P){
+    if(k==="free"){
+      for(const li in P.free) addWord(+li, P.free[li]);
+      continue;
+    }
+    const li = +k;
+    P[li].forEach(jp=>{
+      const c = allChips.find(c=>c.layerIdx===li && c.jp===jp);
+      if(c) state[li].words.push({jp:c.jp, en:c.en, chipEl:c.el});
+    });
+  }
+  render();
+}
+document.querySelectorAll(".preset").forEach(btn=>{
+  btn.addEventListener("click", ()=>applyPreset(PRESETS[+btn.dataset.preset]));
+});
+
+function clearAll(){
+  state.forEach(s=>s.words.length = 0);
+  studioPanel.querySelectorAll(".add-row input").forEach(i=>i.value="");
+}
+document.getElementById("reset").addEventListener("click", ()=>{ clearAll(); render(); });
+
+/* コピー */
+function copy(text, btn){
+  const done = ()=>{ toast.classList.add("show");
+    btn.dataset.orig = btn.textContent; btn.textContent = "写しました ✓";
+    setTimeout(()=>{ toast.classList.remove("show"); btn.textContent = btn.dataset.orig; }, 1400); };
+  const fallback = ()=>{ const ta = document.createElement("textarea");
+    ta.value = text; document.body.appendChild(ta); ta.select();
+    document.execCommand("copy"); ta.remove(); done(); };
+  if(navigator.clipboard && navigator.clipboard.writeText)
+    navigator.clipboard.writeText(text).then(done).catch(fallback);
+  else fallback();
+}
+document.getElementById("copyJP").addEventListener("click", e=>copy(outJP.textContent, e.target));
+document.getElementById("copyEN").addEventListener("click", e=>copy(outEN.textContent, e.target));
+
+render();
+</script>
+<script type="module" src="https://static.cloudflareinsights.com/beacon.min.js/vce701823e78c4301a35b7e07294d87301792088814092" integrity="sha512-UKNk8GbxkABxKcXYuLkO16EleLGUkcvJWtpSNmExE0Too3ZaFAxTscNWEc1OdAv5/BikHawapSCaiD2XCmp+Bw==" data-cf-beacon='{"version":"2024.11.0","token":"4edd5f8ec12a48cfa682ab8261b80a79","spa":2}' crossorigin="anonymous"></script>
+</body>
+</html>
