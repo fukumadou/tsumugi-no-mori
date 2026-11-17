@@ -214,6 +214,14 @@ a.framework .step, .framework a.step{text-decoration:none;cursor:pointer;transit
   border-left:3px solid #B8A679;padding-left:16px;line-height:2;
 }
 footer{padding:28px 6vw;text-align:center;font-size:12px;color:var(--sumi-soft)}
+#toTop{
+  position:fixed;right:18px;bottom:18px;z-index:50;
+  border:1px solid var(--ai);background:#fff;color:var(--ai);
+  padding:10px 16px;border-radius:999px;cursor:pointer;font-family:inherit;font-size:13px;
+  box-shadow:0 2px 8px rgba(38,36,31,.15);display:none;
+}
+#toTop.show{display:block}
+#toTop:focus-visible{outline:2px solid var(--hi);outline-offset:2px}
 @media(max-width:960px){.tanzaku-col{position:static}}
 /* ───── スマホ最適化 ───── */
 @media(max-width:960px){
@@ -259,17 +267,15 @@ footer{padding:28px 6vw;text-align:center;font-size:12px;color:var(--sumi-soft)}
 
 <header class="hero">
   <p class="kicker">Tsumugi-no-Mori ｜ Scene → Language → Prompt</p>
-  <h1>見えたものを、<br>まだ誰も使ったことのない<em>言葉</em>で言う。</h1>
-  <p class="thesis">情景や物質は、そのままではAIに届かない。届くのは言葉だけだ。
-  この装置は、目の前の光景を<b>「場・物質・光・気配・動き」の五層</b>に分解し、
-  一枚の短冊に言語化していく。選んだ語はその場で一句のプロンプトになる。</p>
+  <h1>見えたものを、<em>言葉</em>にする。</h1>
+  <p class="thesis">情景を「場・物質・光・気配・動き」の5層で選ぶだけで、プロンプトができる。</p>
   <div class="framework" aria-label="五層の構成（押すと各層へジャンプします）">
-    <a class="step" href="#layer-1"><b>壱　場</b><span>空間と時間の座標</span></a>
-    <a class="step" href="#layer-2"><b>弐　物質</b><span>素材・質感・温度</span></a>
-    <a class="step" href="#layer-3"><b>参　光</b><span>方向・色温度・影</span></a>
-    <a class="step" href="#layer-4"><b>肆　気配</b><span>匂い・音・湿度・心</span></a>
-    <a class="step" href="#layer-5"><b>伍　動き</b><span>変化と時間の流れ</span></a>
-    <a class="step" href="#layer-6"><b>結　むすび</b><span>心象をそのまま残す</span></a>
+    <a class="step" href="#layer-1"><b>1 場</b></a>
+    <a class="step" href="#layer-2"><b>2 物質</b></a>
+    <a class="step" href="#layer-3"><b>3 光</b></a>
+    <a class="step" href="#layer-4"><b>4 気配</b></a>
+    <a class="step" href="#layer-5"><b>5 動き</b></a>
+    <a class="step" href="#layer-6"><b>6 むすび</b></a>
   </div>
 </header>
 
@@ -286,10 +292,12 @@ footer{padding:28px 6vw;text-align:center;font-size:12px;color:var(--sumi-soft)}
         <p class="out-jp" id="outJP">下の五層から、今日見えたものを選んでください。</p>
         <h4 style="margin-top:14px">PROMPT (EN)</h4>
         <p class="out-en" id="outEN">Select what you saw in the five layers below.</p>
-        <button class="copy-btn" id="copyJP">日本語を写す</button>
-        <button class="copy-btn ghost" id="copyMD">Markdown を写す（Obsidian用）</button>
-        <button class="copy-btn ghost" id="copyEN">EN を写す</button>
-        <p class="toast" id="toast">写しました。</p>
+        <button class="copy-btn" id="copyJP">日本語をコピー</button>
+        <button class="copy-btn ghost" id="copyMD">Markdown をコピー（Obsidianに貼る用）</button>
+        <button class="copy-btn ghost" id="copyEN">EN をコピー</button>
+        <button class="copy-btn ghost" id="dlMD">ノートとして保存（.md ダウンロード）</button>
+        <button class="copy-btn ghost" id="openImg">画像生成AIで試す ↗</button>
+        <p class="toast" id="toast">コピーしました。</p>
         <p class="hint" style="text-align:center">※ 入力・コピーはすべてこの端末内だけで完結します。どこにも送信・保存されません。</p>
         <button class="reset" id="reset">五層をすべて空にする</button>
       </div>
@@ -324,11 +332,12 @@ footer{padding:28px 6vw;text-align:center;font-size:12px;color:var(--sumi-soft)}
   </div>
 </section>
 
+<button id="toTop" aria-label="上に戻る" title="上に戻る">▲ 上へ</button>
 <footer>紬の杜 tsumugi-no-mori ｜ 五層の言葉 — 情景・物質の言語化装置 ｜ AI共創・Fukumadou の創作補助として</footer>
 
 <script>
 const LAYERS = [
-  { no:"壱", name:"場", en:"PLACE",
+  { no:"1", name:"場", en:"PLACE",
     lead:"空間と時間の座標。時間帯を含めると光まで一括で決まる。",
     chips:[
       {jp:"夜明け前の防波堤",en:"a breakwater before dawn"},
@@ -344,7 +353,7 @@ const LAYERS = [
       {jp:"茶室",en:"a tea room"},
       {jp:"山の稜線",en:"a mountain ridge line"}
     ]},
-  { no:"弐", name:"物質", en:"MATTER",
+  { no:"2", name:"物質", en:"MATTER",
     lead:"「古い」より「錆びた銅」。物質名が視覚・触覚・温度を一度に運ぶ。",
     cats:[
       {label:"金属",chips:[
@@ -368,7 +377,7 @@ const LAYERS = [
         {jp:"刻まれた木の柱",en:"a scarred wooden pillar"},
         {jp:"白磁の碗",en:"a white porcelain bowl"}]}
     ]},
-  { no:"参", name:"光", en:"LIGHT",
+  { no:"3", name:"光", en:"LIGHT",
     lead:"光の語には影の裏面がついてくる。光と影をセットで選ぶ。",
     chips:[
       {jp:"障子越しの拡散光",en:"light diffused through shoji paper, soft shadows"},
@@ -381,7 +390,7 @@ const LAYERS = [
       {jp:"窓から差す斜めの午後の光",en:"slanted afternoon light through a window"},
       {jp:"影は濃く、深い",en:"deep, dense shadows"}
     ]},
-  { no:"肆", name:"気配", en:"AIR",
+  { no:"4", name:"気配", en:"AIR",
     lead:"匂い・音・湿度は絵に見えないからこそ、全体の温度を決める。",
     chips:[
       {jp:"潮の匂い",en:"the smell of the tide"},
@@ -394,7 +403,7 @@ const LAYERS = [
       {jp:"埃が舞っている",en:"dust motes adrift"},
       {jp:"幕が上がる前の息止め",en:"the held breath before the curtain rises"}
     ]},
-  { no:"伍", name:"動き", en:"MOTION",
+  { no:"5", name:"動き", en:"MOTION",
     lead:"静止画にも「直前と直後」を。動きの語で瞬間が場面になる。",
     chips:[
       {jp:"水滴が縁を伝う",en:"a droplet trailing down the edge"},
@@ -432,7 +441,7 @@ function panelHTML(){
   let h = "";
   LAYERS.forEach((L,li)=>{
     h += `<section class="layer" id="layer-${li+1}">
-      <div class="layer-head"><span class="layer-no">第${L.no}層</span>
+      <div class="layer-head"><span class="layer-no">0${L.no}</span>
       <h2>${L.name}<small>${L.en}</small></h2></div>
       <p class="lead">${L.lead}</p>
       <div class="chips">` +
@@ -452,7 +461,7 @@ function panelHTML(){
       </section>`;
   });
   h += `<section class="layer" id="layer-6">
-      <div class="layer-head"><span class="layer-no">結</span>
+      <div class="layer-head"><span class="layer-no">06</span>
       <h2>むすび<small>IMPRESSION</small></h2></div>
       <p class="lead">五層を選びながら浮かんだもの——心象、記憶、ひとことを、思ったまま残す。ここに書いたことは、プロンプトのいちばん後ろに「心に残ったのは——」と添えられます。AIへの指示というより、あなたの引出しから出てきたものの記録。空欄のままでも構いません。</p>
       <textarea class="impression" rows="3" placeholder="頭に浮んだことを、思ったまま書く（例：祖母の台所の匂いを思い出す。誰かがすぐそばで笑っていた。）"></textarea>
@@ -613,7 +622,7 @@ document.getElementById("reset").addEventListener("click", ()=>{ clearAll(); ren
 /* コピー */
 function copy(text, btn){
   const done = ()=>{ toast.classList.add("show");
-    btn.dataset.orig = btn.textContent; btn.textContent = "写しました ✓";
+    btn.dataset.orig = btn.textContent; btn.textContent = "コピーしました ✓";
     setTimeout(()=>{ toast.classList.remove("show"); btn.textContent = btn.dataset.orig; }, 1400); };
   const fallback = ()=>{ const ta = document.createElement("textarea");
     ta.value = text; document.body.appendChild(ta); ta.select();
@@ -642,10 +651,41 @@ function buildMarkdown(){
   lines.push("", `> ${outJP.textContent}`);
   return lines.join("\n");
 }
+// 上へ戻る
+const toTop = document.getElementById("toTop");
+window.addEventListener("scroll", ()=>{ toTop.classList.toggle("show", window.scrollY > 600); }, {passive:true});
+toTop.addEventListener("click", ()=>window.scrollTo({top:0, behavior:"smooth"}));
+
+// .md ノート保存（端末にダウンロード → ObsidianのVaultフォルダへ移す）
+function downloadMD(){
+  const md = buildMarkdown();
+  if(!md){ toast.textContent="まだ選択がありません。"; toast.classList.add("show");
+    setTimeout(()=>{toast.classList.remove("show"); toast.textContent="コピーしました。";},1400); return; }
+  const d = new Date();
+  const name = `五層の言葉_${d.getFullYear()}-${String(d.getMonth()+1).padStart(2,"0")}-${String(d.getDate()).padStart(2,"0")}.md`;
+  const blob = new Blob([md], {type:"text/markdown"});
+  const a = document.createElement("a");
+  a.href = URL.createObjectURL(blob); a.download = name;
+  document.body.appendChild(a); a.click(); a.remove();
+  setTimeout(()=>URL.revokeObjectURL(a.href), 2000);
+  toast.textContent="ノートを保存しました（ダウンロードへ）。"; toast.classList.add("show");
+  setTimeout(()=>toast.classList.remove("show"),1800);
+}
+document.getElementById("dlMD").addEventListener("click", downloadMD);
+
+// 画像生成AIで試す（現在のプロンプトを持って遷移）
+document.getElementById("openImg").addEventListener("click", ()=>{
+  const t = outJP.textContent;
+  if(!state.some(s=>s.words.length)){ toast.textContent="まず五層を選んでください。"; toast.classList.add("show");
+    setTimeout(()=>toast.classList.remove("show"),1400); return; }
+  const sep = t.includes("？") || outJP.textContent.includes("?") ? "%0A%0A" : "%0A";
+  window.open("https://www.genspark.ai/ai_image", "_blank", "noopener");
+});
+
 document.getElementById("copyMD").addEventListener("click", e=>{
   const md = buildMarkdown();
   if(!md){ toast.textContent = "まだ選択がありません。"; toast.classList.add("show");
-    setTimeout(()=>{toast.classList.remove("show"); toast.textContent="写しました。";},1400); return; }
+    setTimeout(()=>{toast.classList.remove("show"); toast.textContent="コピーしました。";},1400); return; }
   copy(md, e.target);
 });
 
