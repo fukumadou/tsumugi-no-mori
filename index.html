@@ -22,12 +22,14 @@
 }
 *{margin:0;padding:0;box-sizing:border-box}
 html{scroll-behavior:smooth}
+html,body{overflow-x:clip}
 body{
   background:var(--washi);
   color:var(--sumi);
   font-family:'Zen Kaku Gothic New',sans-serif;
   font-size:15px;line-height:1.75;
   -webkit-font-smoothing:antialiased;
+  overflow-wrap:anywhere;
 }
 @media (prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}}
 ::selection{background:var(--ai);color:#fff}
@@ -60,6 +62,19 @@ body{
 }
 .framework .step b{font-family:'Shippori Mincho',serif;font-size:17px;color:var(--ai)}
 .framework .step span{font-size:12px;color:var(--sumi-soft)}
+a.framework .step, .framework a.step{text-decoration:none;cursor:pointer;transition:all .15s}
+.framework a.step:hover{border-color:var(--ai);background:var(--ai-veil)}
+.layer{scroll-margin-top:16px}
+/* ───── むすび（心象の窓）───── */
+.impression{
+  width:100%;background:#fff;border:1px solid var(--line);border-radius:2px;
+  padding:14px;font-family:'Shippori Mincho',serif;font-size:15.5px;line-height:1.9;
+  color:var(--sumi);resize:vertical;min-height:7em;
+}
+.impression:focus{outline:none;border-color:var(--ai);box-shadow:0 0 0 3px var(--ai-veil)}
+.impression::placeholder{color:#B4B0A2;font-family:'Zen Kaku Gothic New',sans-serif;font-size:13.5px}
+.tz-row.tz-musubi .tz-label{background:var(--kin)}
+.tz-row.tz-musubi .tz-words{white-space:pre-wrap}
 
 /* ───── 本体 ───── */
 .studio{
@@ -210,6 +225,13 @@ footer{padding:28px 6vw;text-align:center;font-size:12px;color:var(--sumi-soft)}
   .add-row button{padding:12px 22px;font-size:15px}
   .tz-word button{font-size:16px;padding:6px 8px}  /* ✎ × のタップ領域を拡大 */
   .tz-words{font-size:16px}
+  /* 短冊ラベルはスマホでは横書きに切替（縦書きの重なりを構造的に回避） */
+  .tz-row{flex-direction:column;gap:4px}
+  .tz-label{
+    writing-mode:horizontal-tb;
+    display:inline-block;align-self:flex-start;
+    padding:2px 12px;min-height:0;font-size:13px;letter-spacing:.3em;
+  }
   .copy-btn{padding:14px;font-size:16px}
   .preset{padding:12px 26px;font-size:16px}
   .free-input,.free{font-size:16px}
@@ -230,12 +252,13 @@ footer{padding:28px 6vw;text-align:center;font-size:12px;color:var(--sumi-soft)}
   <p class="thesis">情景や物質は、そのままではAIに届かない。届くのは言葉だけだ。
   この装置は、目の前の光景を<b>「場・物質・光・気配・動き」の五層</b>に分解し、
   一枚の短冊に言語化していく。選んだ語はその場で一句のプロンプトになる。</p>
-  <div class="framework" aria-label="五層の構成">
-    <div class="step"><b>壱　場</b><span>空間と時間の座標</span></div>
-    <div class="step"><b>弐　物質</b><span>素材・質感・温度</span></div>
-    <div class="step"><b>参　光</b><span>方向・色温度・影</span></div>
-    <div class="step"><b>肆　気配</b><span>匂い・音・湿度・心</span></div>
-    <div class="step"><b>伍　動き</b><span>変化と時間の流れ</span></div>
+  <div class="framework" aria-label="五層の構成（押すと各層へジャンプします）">
+    <a class="step" href="#layer-1"><b>壱　場</b><span>空間と時間の座標</span></a>
+    <a class="step" href="#layer-2"><b>弐　物質</b><span>素材・質感・温度</span></a>
+    <a class="step" href="#layer-3"><b>参　光</b><span>方向・色温度・影</span></a>
+    <a class="step" href="#layer-4"><b>肆　気配</b><span>匂い・音・湿度・心</span></a>
+    <a class="step" href="#layer-5"><b>伍　動き</b><span>変化と時間の流れ</span></a>
+    <a class="step" href="#layer-6"><b>結　むすび</b><span>心象をそのまま残す</span></a>
   </div>
 </header>
 
@@ -253,8 +276,10 @@ footer{padding:28px 6vw;text-align:center;font-size:12px;color:var(--sumi-soft)}
         <h4 style="margin-top:14px">PROMPT (EN)</h4>
         <p class="out-en" id="outEN">Select what you saw in the five layers below.</p>
         <button class="copy-btn" id="copyJP">日本語を写す</button>
+        <button class="copy-btn ghost" id="copyMD">Markdown を写す（Obsidian用）</button>
         <button class="copy-btn ghost" id="copyEN">EN を写す</button>
         <p class="toast" id="toast">写しました。</p>
+        <p class="hint" style="text-align:center">※ 入力・コピーはすべてこの端末内だけで完結します。どこにも送信・保存されません。</p>
         <button class="reset" id="reset">五層をすべて空にする</button>
       </div>
     </div>
@@ -395,7 +420,7 @@ const allChips = []; // {el, li, jp, en}
 function panelHTML(){
   let h = "";
   LAYERS.forEach((L,li)=>{
-    h += `<section class="layer">
+    h += `<section class="layer" id="layer-${li+1}">
       <div class="layer-head"><span class="layer-no">第${L.no}層</span>
       <h2>${L.name}<small>${L.en}</small></h2></div>
       <p class="lead">${L.lead}</p>
@@ -415,6 +440,12 @@ function panelHTML(){
       <p class="hint">足した語も、右の短冊で ✎ 編集・× 削除できます。</p>
       </section>`;
   });
+  h += `<section class="layer" id="layer-6">
+      <div class="layer-head"><span class="layer-no">結</span>
+      <h2>むすび<small>IMPRESSION</small></h2></div>
+      <p class="lead">五層を選びながら浮かんだもの——心象、記憶、ひとことを、思ったまま残す。ここに書いたことは、プロンプトのいちばん後ろに「心に残ったのは——」と添えられます。AIへの指示というより、あなたの引出しから出てきたものの記録。空欄のままでも構いません。</p>
+      <textarea class="impression" rows="3" placeholder="頭に浮んだことを、思ったまま書く（例：祖母の台所の匂いを思い出す。誰かがすぐそばで笑っていた。）"></textarea>
+    </section>`;
   return h;
 }
 
@@ -461,11 +492,21 @@ function render(){
       : `<span class="empty">—</span>`;
     return `<div class="tz-row"><span class="tz-label">${L.name}</span><span class="tz-words">${body}</span></div>`;
   }).join("");
+  // むすび（心象）
+  const impEl = document.querySelector(".impression");
+  const imp = impEl ? impEl.value.trim() : "";
+  const musubiRow = imp
+    ? `<div class="tz-row tz-musubi"><span class="tz-label">むすび</span><span class="tz-words"><span class="tz-word"><span class="wtext">${escapeHTML(imp)}</span></span></span></div>`
+    : "";
+  tanzakuEl.innerHTML = tanzakuEl.innerHTML + musubiRow;
   // 出力
   const jps = state.flatMap((s,li)=>s.words.map(w=>w.jp));
   const ens = state.flatMap(s=>s.words.map(w=>w.en)).filter(Boolean);
-  outJP.textContent = jps.length ? jps.join("、") + "。" : "下の五層から、今日見えたものを選んでください。";
-  outEN.textContent = ens.length ? ens.join(", ") : "Select what you saw in the five layers below.";
+  const jLayer = jps.length ? jps.join("、") + "。" : "";
+  const jImp = imp ? `心に残ったのは——${imp.replace(/[。、.!！?？\s]+$/,"")}。` : "";
+  outJP.textContent = (jLayer || jImp) ? jLayer + jImp : "下の五層から、今日見えたものを選んでください。";
+  const eImp = imp && /\p{Script=Latin}/u.test(imp) ? imp : "";
+  outEN.textContent = (ens.length || eImp) ? [ens.join(", "), eImp].filter(Boolean).join(", ") : "Select what you saw in the five layers below.";
 }
 
 function escapeHTML(s){ return s.replace(/[&<>"']/g, m=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[m])); }
@@ -503,6 +544,10 @@ function addWord(li, text){
   if(inp) inp.value = "";
   render();
 }
+
+document.addEventListener("input", e=>{
+  if(e.target.classList.contains("impression")) render();
+});
 
 /* 短冊上の編集・削除 */
 tanzakuEl.addEventListener("click", e=>{
@@ -549,6 +594,8 @@ document.querySelectorAll(".preset").forEach(btn=>{
 function clearAll(){
   state.forEach(s=>s.words.length = 0);
   studioPanel.querySelectorAll(".add-row input").forEach(i=>i.value="");
+  const impEl = document.querySelector(".impression");
+  if(impEl) impEl.value = "";
 }
 document.getElementById("reset").addEventListener("click", ()=>{ clearAll(); render(); });
 
@@ -566,6 +613,30 @@ function copy(text, btn){
 }
 document.getElementById("copyJP").addEventListener("click", e=>copy(outJP.textContent, e.target));
 document.getElementById("copyEN").addEventListener("click", e=>copy(outEN.textContent, e.target));
+
+/* Obsidian用 Markdown 生成 */
+function buildMarkdown(){
+  const d = new Date();
+  const ymd = `${d.getFullYear()}-${String(d.getMonth()+1).padStart(2,"0")}-${String(d.getDate()).padStart(2,"0")}`;
+  const lines = [`## 五層の言葉（${ymd}）`];
+  LAYERS.forEach((L,li)=>{
+    const ws = state[li].words.map(w=>w.jp);
+    if(ws.length) lines.push(`- **${L.name}**: ${ws.join("、")}`);
+  });
+  const impEl = document.querySelector(".impression");
+  const imp = impEl ? impEl.value.trim() : "";
+  if(imp) lines.push(`- **むすび**: ${imp}`);
+  const jps = state.flatMap(s=>s.words.map(w=>w.jp));
+  if(!jps.length && !imp) return "";
+  lines.push("", `> ${outJP.textContent}`);
+  return lines.join("\n");
+}
+document.getElementById("copyMD").addEventListener("click", e=>{
+  const md = buildMarkdown();
+  if(!md){ toast.textContent = "まだ選択がありません。"; toast.classList.add("show");
+    setTimeout(()=>{toast.classList.remove("show"); toast.textContent="写しました。";},1400); return; }
+  copy(md, e.target);
+});
 
 render();
 </script>
